@@ -1,0 +1,6 @@
+{
+  "name": "vanilla-redux-with-parcel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT"
+}

@@ -3,6 +3,8 @@ import {
   handleActions,
 } from 'C:/Users/kuuha/AppData/Local/Yarn/Data/global/node_modules/redux-actions';
 
+import produce from 'C:/Users/kuuha/AppData/Local/Yarn/Data/global/node_modules/immer';
+
 const CHANGE = 'todo/CHANGE',
   INSERT = 'todo/INSERT',
   TOGGLE = 'todo/TOGGLE',
@@ -57,35 +59,58 @@ const initialState = {
 
 const todo = handleActions(
   {
-    [CHANGE]: (state, { payload: input }) => {
-      return {
-        ...state,
-        input,
-      };
-    },
-    [INSERT]: (state, { payload: toDo }) => {
-      return {
-        ...state,
-        toDos: state.toDos.concat(toDo),
-      };
-    },
-    [TOGGLE]: (state, { payload: id }) => {
-      return {
-        ...state,
-        toDos: state.toDos.map(toDo =>
-          toDo.id === id ? { ...toDo, done: !toDo.done } : toDo
-        ),
-      };
-    },
-    [REMOVE]: (state, { payload: id }) => {
-      return {
-        ...state,
-        toDos: state.toDos.filter(toDo => toDo.id !== id),
-      };
-    },
+    [CHANGE]: (state, { payload: input }) =>
+      produce(state, draft => {
+        draft.input = input;
+      }),
+    [INSERT]: (state, { payload: toDo }) =>
+      produce(state, draft => {
+        draft.toDos.push(toDo);
+      }),
+    [TOGGLE]: (state, { payload: id }) =>
+      produce(state, draft => {
+        const toDo = draft.toDos.map(toDo => toDo.id === id);
+        toDo.done = !toDo.done;
+      }),
+    [REMOVE]: (state, { payload: id }) =>
+      produce(state, draft => {
+        const index = draft.toDos.findIndex(toDo => toDo.id === id);
+        draft.toDos.splice(index, 1);
+      }),
   },
   initialState
 );
+// const todo = handleActions(
+//   {
+//     [CHANGE]: (state, { payload: input }) => {
+//       return {
+//         ...state,
+//         input,
+//       };
+//     },
+//     [INSERT]: (state, { payload: toDo }) => {
+//       return {
+//         ...state,
+//         toDos: state.toDos.concat(toDo),
+//       };
+//     },
+//     [TOGGLE]: (state, { payload: id }) => {
+//       return {
+//         ...state,
+//         toDos: state.toDos.map(toDo =>
+//           toDo.id === id ? { ...toDo, done: !toDo.done } : toDo
+//         ),
+//       };
+//     },
+//     [REMOVE]: (state, { payload: id }) => {
+//       return {
+//         ...state,
+//         toDos: state.toDos.filter(toDo => toDo.id !== id),
+//       };
+//     },
+//   },
+//   initialState
+// );
 
 // const todo = (state = initialState, action) => {
 //   switch (action.type) {

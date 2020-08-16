@@ -1,6 +1,6 @@
 import {
   createAction,
-  handleAction,
+  handleActions,
 } from 'C:/Users/kuuha/AppData/Local/Yarn/Data/global/node_modules/redux-actions';
 
 const CHANGE = 'todo/CHANGE',
@@ -55,35 +55,37 @@ const initialState = {
   toDos: [],
 };
 
-const todo = handleAction({
-  [CHANGE]: (state, { payload: input }) => {
-    return {
-      ...state,
-      input,
-    };
+const todo = handleActions(
+  {
+    [CHANGE]: (state, { payload: input }) => {
+      return {
+        ...state,
+        input,
+      };
+    },
+    [INSERT]: (state, { payload: toDo }) => {
+      return {
+        ...state,
+        toDos: state.toDos.concat(toDo),
+      };
+    },
+    [TOGGLE]: (state, { payload: id }) => {
+      return {
+        ...state,
+        toDos: state.toDos.map(toDo =>
+          toDo.id === id ? { ...toDo, done: !toDo.done } : toDo
+        ),
+      };
+    },
+    [REMOVE]: (state, { payload: id }) => {
+      return {
+        ...state,
+        toDos: state.toDos.filter(toDo => toDo.id !== id),
+      };
+    },
   },
-  [INSERT]: (state, { payload: toDo }) => {
-    return {
-      ...state,
-      toDos: state.toDos.concat(toDo),
-    };
-  },
-  [TOGGLE]: (state, { payload: id }) => {
-    return {
-      ...state,
-      toDos: state.toDos.map(toDo =>
-        toDo.id === id ? { ...toDo, done: !toDo.done } : toDo
-      ),
-    };
-  },
-  [REMOVE]: (state, { payload: id }) => {
-    return {
-      ...state,
-      toDos: state.toDos.filter(toDo => toDo.id !== id),
-    };
-  },
-  initialState,
-});
+  initialState
+);
 
 // const todo = (state = initialState, action) => {
 //   switch (action.type) {
@@ -113,4 +115,5 @@ const todo = handleAction({
 //       return state;
 //   }
 // };
+
 export default todo;

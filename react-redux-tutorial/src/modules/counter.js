@@ -1,6 +1,6 @@
 import {
   createAction,
-  handleAction,
+  handleActions,
 } from 'C:/Users/kuuha/AppData/Local/Yarn/Data/global/node_modules/redux-actions';
 
 const INC = 'counter/INC';
@@ -35,7 +35,7 @@ const initialState = {
 //   }
 // };
 
-const counter = handleAction(
+const counter = handleActions(
   {
     [INC]: (state, action) => ({ number: state.number + 1 }),
     [DEC]: (state, action) => ({ number: state.number - 1 }),

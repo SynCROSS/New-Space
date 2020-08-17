@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { connect } from 'C:/Users/kuuha/AppData/Roaming/npm/node_modules/react-redux';
-import { actionCreators } from '../todoStore';
+import { add } from '../todoStore';
+// import { actionCreators } from '../todoStore';
 import ToDo from '../components/ToDo';
 
 const Home = ({ toDos, addTODO }) => {
@@ -25,7 +26,9 @@ const Home = ({ toDos, addTODO }) => {
           onChange={onChange}
           placeholder="Write to do"
         />
-        <button>Add</button>
+        <button>
+          <b>Add</b>
+        </button>
       </form>
       <ul>
         {toDos.map(toDo => (
@@ -47,7 +50,8 @@ const mapDispatchToProps = (dispatch, ownProps?) => ({
   // return {
   addTODO: text => {
     // console.log('dispatch');
-    dispatch(actionCreators.addTODO(text));
+    dispatch(add(text));
+    // dispatch(actionCreators.addTODO(text));
   },
   // };
 });

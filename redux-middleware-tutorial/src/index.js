@@ -12,11 +12,12 @@ import * as serviceWorker from './serviceWorker';
 import rootReducer from './modules';
 // import loggerMiddleware from './lib/loggerMiddleware';
 import { createLogger } from 'C:/Users/kuuha/AppData/Local/Yarn/Data/global/node_modules/redux-logger';
+import ReduxThunk from 'redux-thunk';
 
 const logger = createLogger();
 // const store = createStore(rootReducer, composeWithDevTools());
 // const store = createStore(rootReducer, applyMiddleware(loggerMiddleware));
-const store = createStore(rootReducer, applyMiddleware(logger));
+const store = createStore(rootReducer, applyMiddleware(logger, ReduxThunk));
 
 ReactDOM.render(
   <Provider store={store}>

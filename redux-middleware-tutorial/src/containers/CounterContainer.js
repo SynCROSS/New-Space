@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'C:/Users/kuuha/AppData/Local/Yarn/Data/global/node_modules/react-redux';
-import { increase, decrease } from '../modules/counter';
-import Counter from './Counter';
+// import { increase, decrease } from '../modules/counter';
+import { incAsync as increase, decAsync as decrease } from '../modules/counter';
+import Counter from '../components/Counter';
 
 const CounterContainer = ({ num, increase, decrease }) => {
   return <Counter num={num} onInc={increase} onDec={decrease} />;

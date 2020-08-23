@@ -1,7 +1,7 @@
 import React from 'react';
 // import logo from './logo.svg';
 // import './App.css';
-// import CounterContainer from './components/CounterContainer';
+// import CounterContainer from './containers/CounterContainer';
 import SampleContainer from './containers/SampleContainer';
 
 function App() {
